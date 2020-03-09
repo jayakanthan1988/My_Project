@@ -1,0 +1,30 @@
+{ 
+	"format_version": 1,
+	"imports":[ {
+		"target_table": "EMPLOYEE_MASTER",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Employee_Master_CDS.csv",
+			"has_header": false,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ","
+			}
+		},
+		"import_settings": {
+        	"include_filter" : [ ],			
+			"import_columns": ["EMPID",
+			"NAME",
+			"DESIGNATION",
+			"DEPARTMENT",
+			"EXPERIANCE"]
+		},
+		"column_mappings": {
+			"EMPID": 1,
+			"NAME": 2,
+			"DESIGNATION": 3,
+			"DEPARTMENT" : 4,
+			"EXPERIANCE": 5
+		}
+	}]
+}

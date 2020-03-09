@@ -1,0 +1,32 @@
+ID: MYPROJECT
+_schema-version: "2.1"
+description: My Project
+version: 0.0.1
+modules:
+  - name: MYPROJECT-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: MYPROJECT-db-hdi-container
+  - name: MYPROJECT-srv
+    type: java
+    path: srv
+    parameters:
+      memory: 1024M
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: MYPROJECT-db-hdi-container
+        properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
+            {"service_name_for_DefaultDB" : "~{hdi-container-name}"}]'
+resources:
+  - name: MYPROJECT-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: ${service-name}

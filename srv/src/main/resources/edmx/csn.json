@@ -1,0 +1,264 @@
+{
+  "definitions": {
+    "CatalogService": {
+      "@source": "srv/cat-service.cds",
+      "kind": "service"
+    },
+    "Employee_Master": {
+      "kind": "entity",
+      "@cds.persistence.name": "EMPLOYEE_MASTER",
+      "elements": {
+        "EMPID": {
+          "@cds.persistence.name": "EMPID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "NAME": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String"
+        },
+        "DESIGNATION": {
+          "@cds.persistence.name": "DESIGNATION",
+          "localized": true,
+          "type": "cds.String"
+        },
+        "DEPARTMENT": {
+          "@cds.persistence.name": "DEPARTMENT",
+          "localized": true,
+          "type": "cds.String"
+        },
+        "EXPERIANCE": {
+          "@cds.persistence.name": "EXPERIANCE",
+          "type": "cds.Integer"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "Employee_Master_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "EMPID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "EMPID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "Employee_Master_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "EMPID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "EMPID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Employee_Master_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "EMPLOYEE_MASTER_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "EMPID": {
+          "@cds.persistence.name": "EMPID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "DESIGNATION": {
+          "@cds.persistence.name": "DESIGNATION",
+          "localized": false,
+          "type": "cds.String"
+        },
+        "DEPARTMENT": {
+          "@cds.persistence.name": "DEPARTMENT",
+          "localized": false,
+          "type": "cds.String"
+        }
+      }
+    },
+    "localized.Employee_Master": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_EMPLOYEE_MASTER",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "Employee_Master"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "DESIGNATION"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "DESIGNATION"
+                  ]
+                }
+              ],
+              "as": "DESIGNATION"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "DEPARTMENT"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "DEPARTMENT"
+                  ]
+                }
+              ],
+              "as": "DEPARTMENT"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "EMPID": {
+          "@cds.persistence.name": "EMPID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "NAME": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String"
+        },
+        "DESIGNATION": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESIGNATION",
+          "localized": true,
+          "type": "cds.String"
+        },
+        "DEPARTMENT": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DEPARTMENT",
+          "localized": true,
+          "type": "cds.String"
+        },
+        "EXPERIANCE": {
+          "@cds.persistence.name": "EXPERIANCE",
+          "type": "cds.Integer"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "Employee_Master_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "EMPID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "EMPID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "Employee_Master_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "EMPID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "EMPID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v1.23.2"
+  },
+  "$version": "1.0",
+  "@sql_mapping": "plain"
+}

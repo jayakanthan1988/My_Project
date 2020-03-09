@@ -1,0 +1,36 @@
+{ 
+	"format_version": 1,
+	"imports":[ {
+            "target_table": "STUDENTADDRESS",
+		    "source_data": {
+			"data_type": "CSV",
+			"file_name": "Student_Address_File.csv",
+			"has_header": false,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ","
+			}
+		},
+		"import_settings": {
+           	"include_filter" : [ ],		
+			"import_columns": ["STMASTER.STUDENTID",
+			"ADDRESSNO",
+			"STREET1",
+			"STREET2",
+			"STREET3",
+			"CITY",
+			"PINCODE",
+			"Mobile"]
+		},
+		"column_mappings": {
+			"STMASTER.STUDENTID": 1,
+			"ADDRESSNO": 2,
+			"STREET1": 3,
+			"STREET2": 4,
+			"STREET3": 5,
+			"CITY": 6,
+			"PINCODE": 7,
+			"Mobile": 8
+		}
+	}]
+}

@@ -1,0 +1,30 @@
+{ 
+	"format_version": 1,
+	"imports":[ {
+		"target_table": "STUDENTMASTER",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Student_Master_File.csv",
+			"has_header": false,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ","
+			}
+		},
+		"import_settings": {
+        	"include_filter" : [ ],			
+			"import_columns": ["STUDENTID",
+			"STUDENTNAME",
+			"DEPARTMENT",
+			"YEAR",
+			"JOINDATE"]
+		},
+		"column_mappings": {
+			"STUDENTID": 1,
+			"STUDENTNAME": 2,
+			"DEPARTMENT": 3,
+			"YEAR": 4,
+			"JOINDATE": 5
+		}
+	}]
+}

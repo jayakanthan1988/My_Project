@@ -1,0 +1,28 @@
+VIEW "Student_Details"
+   ( "STUDENTID",
+	 "STUDENTNAME",
+	 "DEPARTMENT",
+	 "YEAR",
+	 "JOINDATE"
+	 "ADDRESSNO",
+   	 "STREET1",
+   	 "STREET2",
+   	 "STREET3",
+   	 "CITY",
+   	 "PINCODE",
+   	 "Mobile"
+   ) AS SELECT
+	 "Master_$0"."STUDENTID" ,
+	 "Master_$0"."STUDENTNAME" ,
+	 "Master_$0"."DEPARTMENT" ,
+     "Master_$0"."YEAR" ,
+	 "Master_$0"."JOINDATE"
+	 "Address_$1"."ADDRESSNO",
+     "Address_$1"."STREET1",
+   	 "Address_$1"."STREET2",
+   	 "Address_$1"."STREET3",
+   	 "Address_$1"."CITY",
+   	 "Address_$1"."PINCODE",
+   	 "Address_$1"."Mobile"
+FROM ( "STUDENTMASTER" AS "Master_$0" 
+	INNER JOIN "STUDENTADDRESS" AS "Address_$1" ON ( "Master_$0"."STUDENTID" = "Address_$1"."STMASTER.STUDENTID" ) ) WITH READ ONLY
